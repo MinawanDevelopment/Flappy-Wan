@@ -27,21 +27,21 @@ class MainMenu extends FlxState
 
 		wrTxt = new TextSprite();
         wrTxt.size = 50;
-		wrTxt.text = "Loading WR Score";
+		wrTxt.text = "Loading";
 		wrTxt.screenCenter();
 		add(wrTxt);
 
-        inputForm = new FlxInputText(FlxG.width - 200, 100, "", 12, FlxColor.WHITE, FlxColor.GRAY);
-        if (NotSoConstant.USERNAME != "") {
-            inputForm.text = NotSoConstant.USERNAME;
-        } else {
-            inputForm.text = "Username Here";
-        }
-        add(inputForm);
+		// inputForm = new FlxInputText(FlxG.width - 200, 100, "", 12, FlxColor.WHITE, FlxColor.GRAY);
+		// if (NotSoConstant.USERNAME != "") {
+		//     inputForm.text = NotSoConstant.USERNAME;
+		// } else {
+		//     inputForm.text = "Username Here";
+		// }
+		// add(inputForm);
 
-        add(inputForm);
+		// add(inputForm);
 
-		BackendCaller.sendRequest("/api/wr/get", {"auth": APIStuff.auth_key}, onGotWR, onWRError);
+		BackendCaller.sendGetRequest("/api/wr/get", onGotWR, onWRError);
 
 		super.create();
 	}
@@ -51,7 +51,7 @@ class MainMenu extends FlxState
 
 
         if (FlxG.keys.justPressed.ENTER) {
-            NotSoConstant.USERNAME = inputForm.text;
+			// NotSoConstant.USERNAME = inputForm.text;
             FlxG.switchState(new PlayState());
         }
     }
@@ -59,7 +59,7 @@ class MainMenu extends FlxState
 	public function onGotWR(WR)
 	{
 		// var parsed:Dynamic = Json.parse(WR);
-        wrTxt.text = "Record Holder: " + parsed.recordHolder + " | Score: " + parsed.score;
+		wrTxt.text = WR;
         wrTxt.screenCenter();
 	}
 

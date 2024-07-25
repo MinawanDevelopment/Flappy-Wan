@@ -26,7 +26,7 @@ class BackendCaller
 		http.request(true);
 	}
 
-	public function sendGetRequest(url, onComplete, onError)
+	public static function sendGetRequest(url, onComplete, onError)
 	{
 		var http:Http = new Http(url);
 
