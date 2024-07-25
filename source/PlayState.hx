@@ -4,6 +4,7 @@ import backend.APIStuff;
 import backend.BackendCaller;
 import backend.NotSoConstant;
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup;
@@ -28,8 +29,13 @@ class PlayState extends FlxState
 
 	override public function create()
 	{
+		var bg = new FlxSprite();
+		bg.loadGraphic("assets/images/bg.png");
+		add(bg);
+
 		pipes = new FlxSpriteGroup();
 		add(pipes);
+
 
 		scoreTxt = new TextSprite();
 		scoreTxt.x = 50;
@@ -38,6 +44,7 @@ class PlayState extends FlxState
 		add(scoreTxt);
 
 		player = new Player();
+		player.flipX = true;
 		player.onOutOfBoundsCallback = onPlayerDeath; // Thought I'd experiment with callbacks.
 		add(player);
 

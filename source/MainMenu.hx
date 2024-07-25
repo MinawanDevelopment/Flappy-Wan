@@ -4,6 +4,7 @@ import backend.APIStuff;
 import backend.BackendCaller;
 import backend.NotSoConstant;
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.addons.ui.FlxInputText;
 import flixel.util.FlxColor;
@@ -18,6 +19,11 @@ class MainMenu extends FlxState
 
 	override public function create()
 	{
+		var bg = new FlxSprite();
+		bg.loadGraphic("assets/images/bg.png");
+		bg.alpha = 0.6;
+		add(bg);
+
 		playTxt = new TextSprite();
 		playTxt.text = "Press ENTER to play.";
         playTxt.size = 50;
@@ -41,7 +47,7 @@ class MainMenu extends FlxState
 
 		// add(inputForm);
 
-		BackendCaller.sendGetRequest("/api/wr/get", onGotWR, onWRError);
+		BackendCaller.sendGetRequest("https://raw.githubusercontent.com/MinawanDevelopment/Flappy-Wan/main/sillymsg.txt", onGotWR, onWRError);
 
 		super.create();
 	}
